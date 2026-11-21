@@ -1,0 +1,5 @@
+[default]
+extend-ignore-re = ["@tarbo-table", "tarbo-table"]
+
+[files]
+extend-exclude = ["pnpm-lock.yaml", "dist/**", "node_modules/**"]

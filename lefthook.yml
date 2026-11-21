@@ -1,0 +1,35 @@
+glob_matcher: doublestar
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: oxfmt
+      run: pnpm exec oxfmt --no-error-on-unmatched-pattern {staged_files}
+      stage_fixed: true
+    - name: eslint-root
+      glob: '*.{js,ts,tsx}'
+      exclude: ['packages/**', 'examples/**']
+      run: pnpm exec eslint --cache --fix --no-warn-ignored {staged_files}
+      stage_fixed: true
+    - name: eslint-core
+      root: packages/core/
+      glob: '*.{ts,tsx}'
+      run: pnpm exec eslint --cache --fix --no-warn-ignored {staged_files}
+      stage_fixed: true
+
+pre-push:
+  parallel: true
+  jobs:
+    - name: lint
+      group:
+        parallel: true
+        jobs:
+          - name: oxfmt
+            run: pnpm exec oxfmt --check .
+          - name: eslint-root
+            run: pnpm exec eslint --cache eslint.config.js .
+          - name: eslint-core
+            root: packages/core/
+            run: pnpm exec eslint --cache .
+    - name: vitest-related
+      run: pnpm vitest related --run {push_files}

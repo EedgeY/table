@@ -1,0 +1,40 @@
+{
+	"name": "tarbo-table-monorepo",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"preinstall": "npx only-allow pnpm",
+		"prepare": "pnpm run /^prepare:/",
+		"prepare:lefthook": "lefthook install || true",
+		"build": "pnpm run --filter './packages/*' build",
+		"typecheck": "pnpm run --filter './packages/*' typecheck",
+		"test": "pnpm --parallel --aggregate-output /^test:parallel:/",
+		"test:parallel:vitest": "TZ=UTC vitest run",
+		"dev:vanilla": "pnpm --filter vanilla-1m dev",
+		"dev:react": "pnpm --filter react-supabase dev",
+		"lint": "pnpm run --aggregate-output /^lint:/",
+		"lint:oxfmt": "oxfmt --check .",
+		"lint:root": "eslint --cache eslint.config.js .",
+		"lint:submodules": "pnpm --parallel -r --no-bail /^lint/",
+		"format": "pnpm run --aggregate-output /^format:/",
+		"format:oxfmt": "oxfmt .",
+		"release": "pnpm bumpp -r",
+		"release:dist": "bash ./scripts/release-dist.sh"
+	},
+	"devDependencies": {
+		"@eslint/js": "catalog:lint",
+		"@typescript/native-preview": "catalog:types",
+		"bumpp": "catalog:release",
+		"eslint": "catalog:lint",
+		"globals": "catalog:lint",
+		"lefthook": "catalog:release",
+		"oxfmt": "catalog:lint",
+		"typescript-eslint": "catalog:lint",
+		"vitest": "catalog:testing"
+	},
+	"engines": {
+		"node": ">=20"
+	},
+	"packageManager": "pnpm@10.33.4"
+}

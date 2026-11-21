@@ -1,0 +1,218 @@
+:root {
+	--bg: #ffffff;
+	--bg-alt: #fafbfc;
+	--bg-hover: #f1f5f9;
+	--fg: #1e293b;
+	--muted: #64748b;
+	--border: #e2e8f0;
+	--border-soft: #f1f5f9;
+	--accent: #3b82f6;
+	--header-bg: #f8fafc;
+	--selected: #dbeafe;
+}
+
+* {
+	box-sizing: border-box;
+}
+html,
+body {
+	margin: 0;
+	height: 100%;
+}
+body {
+	font-family:
+		ui-sans-serif,
+		system-ui,
+		-apple-system,
+		sans-serif;
+	font-size: 13px;
+	color: var(--fg);
+	background: #f4f6f9;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	height: 100vh;
+}
+
+.topbar {
+	padding: 12px 18px;
+	background: #fff;
+	border-bottom: 1px solid var(--border);
+}
+.topbar h1 {
+	margin: 0 0 6px;
+	font-size: 16px;
+	font-weight: 600;
+	letter-spacing: -0.01em;
+}
+.topbar h1 small {
+	color: var(--muted);
+	font-weight: 400;
+	margin-left: 8px;
+}
+.controls {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	font-size: 12px;
+	flex-wrap: wrap;
+}
+.controls button {
+	padding: 4px 10px;
+	border: 1px solid #cbd5e1;
+	background: #fff;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 12px;
+	color: var(--fg);
+}
+.controls button:hover {
+	background: var(--bg-hover);
+}
+.controls .hint {
+	color: var(--muted);
+}
+.controls .perf {
+	margin-left: auto;
+	font-family: ui-monospace, Menlo, monospace;
+	color: var(--muted);
+	font-size: 11px;
+}
+
+#grid {
+	background: #fff;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+.tg-scroll {
+	flex: 1;
+	overflow: auto;
+	position: relative;
+	contain: strict;
+}
+.tg-header {
+	position: sticky;
+	top: 0;
+	z-index: 2;
+	display: flex;
+	background: var(--header-bg);
+	border-bottom: 1px solid var(--border);
+}
+.tg-th {
+	position: relative;
+	flex-shrink: 0;
+	padding: 6px 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	border-right: 1px solid var(--border);
+	box-sizing: border-box;
+	user-select: none;
+}
+.tg-th-label {
+	font-weight: 600;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	color: #334155;
+	cursor: pointer;
+	display: flex;
+	gap: 4px;
+	align-items: center;
+}
+.tg-th-label:hover {
+	color: var(--fg);
+}
+.tg-th.sorted .tg-th-label {
+	color: var(--accent);
+}
+.tg-sort-arrow {
+	font-size: 9px;
+	color: var(--accent);
+}
+.tg-filter {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 3px 6px;
+	font-size: 11px;
+	font-family: inherit;
+	border: 1px solid var(--border);
+	border-radius: 4px;
+	outline: none;
+}
+.tg-filter:focus {
+	border-color: var(--accent);
+	box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.tg-resize {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 6px;
+	cursor: col-resize;
+	user-select: none;
+}
+.tg-resize:hover,
+.tg-resize.dragging {
+	background: var(--accent);
+	opacity: 0.4;
+}
+
+.tg-spacer {
+	position: relative;
+}
+.tg-rows {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+.tg-row {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	box-sizing: border-box;
+	border-bottom: 1px solid var(--border-soft);
+	will-change: transform;
+	contain: layout paint;
+	cursor: pointer;
+}
+.tg-row.alt {
+	background: var(--bg-alt);
+}
+.tg-row:hover {
+	background: var(--bg-hover);
+}
+.tg-row.selected {
+	background: var(--selected) !important;
+}
+.tg-td {
+	flex-shrink: 0;
+	padding: 0 10px;
+	display: flex;
+	align-items: center;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	border-right: 1px solid var(--border-soft);
+	box-sizing: border-box;
+}
+.tg-td.num {
+	justify-content: flex-end;
+	font-variant-numeric: tabular-nums;
+}
+
+.statusbar {
+	padding: 6px 14px;
+	background: var(--header-bg);
+	border-top: 1px solid var(--border);
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 11px;
+	color: var(--muted);
+	display: flex;
+	gap: 16px;
+	align-items: center;
+}

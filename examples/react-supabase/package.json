@@ -1,0 +1,29 @@
+{
+	"name": "react-supabase",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"typecheck": "tsgo --noEmit"
+	},
+	"dependencies": {
+		"@tarbo-table/core": "workspace:*",
+		"@tarbo-table/core-rs": "workspace:*",
+		"@tarbo-table/ui": "workspace:*",
+		"nuqs": "catalog:url-state",
+		"react": "catalog:react",
+		"react-dom": "catalog:react"
+	},
+	"devDependencies": {
+		"@tailwindcss/vite": "catalog:ui",
+		"@types/react": "catalog:react",
+		"@types/react-dom": "catalog:react",
+		"@typescript/native-preview": "catalog:types",
+		"@vitejs/plugin-react": "catalog:tooling-react",
+		"tailwindcss": "catalog:ui",
+		"vite": "^6.0.7"
+	}
+}

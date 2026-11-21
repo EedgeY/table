@@ -1,0 +1,11 @@
+# A RowProvider seam separates client and server modes
+
+The table runs in one of two **Modes** (CONTEXT.md): in **client mode** the in-process index pipeline computes the Result Set / Page over rows held in memory; in **server mode** filter / sort / pagination are delegated to the data source on each query-affecting change. These two paths differ in almost every read and write, and the difference was previously open-coded as `if (mode === 'server')` at ~15 call sites in `create-table.ts`. We consolidate the difference behind a single internal `RowProvider` seam with two adapters — `ClientRowProvider` (wraps the pipeline) and `ServerRowProvider` (wraps the server store) — so `create-table.ts` is branch-free and each adapter is testable in isolation (client without `fetch`, server without the pipeline).
+
+## Consequences
+
+- **The index pipeline is client-only.** Server mode bypasses it for reads; row positions/indices have no stable meaning server-side (`resultIndices` / `pageIndices` return the degenerate `0..n-1`), and these feed grouping/aggregation only meaningfully in client mode.
+- **Pagination clamping is client-only.** Clamping needs the total Result Set count synchronously, which only client mode has. `TableState.pagination` stays the single source of truth; the client adapter returns the clamped value and `create-table` writes it back, preserving the frozen/observable contract.
+- **Fetch fires only on query-affecting changes.** `ServerRowProvider` owns fetch triggering and invalidates only on `setPredicate` / `setSort` / `setPagination` / `setData`. Column-width, visibility, pinning and selection changes no longer refetch (a deliberate fix to prior over-fetching, where every `setState` invalidated the server query).
+- **The seam is not perfectly disjoint.** The pipeline is still constructed in both modes because it retains a secondary role: holding the current data ref (for `withEdit` optimistic updates) and the column list (for Computed Column accessors). The RowProvider abstracts the read path, query application, and fetch — not column/data management.
+- This seam is distinct from, and nests outside, the existing `EngineDriver` seam (JS vs Rust/WASM), which lives inside `ClientRowProvider`.

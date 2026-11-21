@@ -1,0 +1,35 @@
+/**
+ * @tarbo-table/ui の Tailwind CSS v4 用テーマ + ベーススタイル。
+ * consumer 側で `@import '@tarbo-table/ui/styles.css';` する。
+ * Tailwind v4 の `@theme` ディレクティブで CSS 変数を定義。
+ */
+
+@import 'tailwindcss';
+
+@theme {
+	--color-border: oklch(0.92 0 0);
+	--color-background: oklch(1 0 0);
+	--color-foreground: oklch(0.2 0 0);
+	--color-muted: oklch(0.97 0 0);
+	--color-muted-foreground: oklch(0.55 0 0);
+	--color-accent: oklch(0.7 0.18 145);
+	--color-accent-foreground: oklch(0.98 0 0);
+	--color-primary: oklch(0.2 0 0);
+	--color-primary-foreground: oklch(0.98 0 0);
+	--color-destructive: oklch(0.62 0.21 25);
+
+	--font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+	--font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+}
+
+@layer base {
+	.tt-data-table {
+		font-family: var(--font-sans);
+		color: var(--color-foreground);
+		background: var(--color-background);
+	}
+
+	.tt-tabular {
+		font-variant-numeric: tabular-nums;
+	}
+}

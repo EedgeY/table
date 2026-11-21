@@ -1,0 +1,131 @@
+{
+	"name": "@tarbo-table/core",
+	"version": "0.2.0",
+	"description": "Zero-dependency, high-performance headless table core (filter AST, multi-sort, selection, pagination, virtualization). Optional grouping/aggregate/export/chart/query as opt-in extensions.",
+	"homepage": "https://github.com/EedgeY/table#readme",
+	"bugs": "https://github.com/EedgeY/table/issues",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/EedgeY/table.git",
+		"directory": "packages/core"
+	},
+	"files": [
+		"dist"
+	],
+	"type": "module",
+	"sideEffects": false,
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		},
+		"./create-table": {
+			"types": "./dist/create-table.d.ts",
+			"import": "./dist/create-table.js"
+		},
+		"./column": {
+			"types": "./dist/column.d.ts",
+			"import": "./dist/column.js"
+		},
+		"./filter": {
+			"types": "./dist/filter.d.ts",
+			"import": "./dist/filter.js"
+		},
+		"./sort": {
+			"types": "./dist/sort.d.ts",
+			"import": "./dist/sort.js"
+		},
+		"./selection": {
+			"types": "./dist/selection.d.ts",
+			"import": "./dist/selection.js"
+		},
+		"./pagination": {
+			"types": "./dist/pagination.d.ts",
+			"import": "./dist/pagination.js"
+		},
+		"./virtual": {
+			"types": "./dist/virtual.d.ts",
+			"import": "./dist/virtual.js"
+		},
+		"./aggregate": {
+			"types": "./dist/aggregate.d.ts",
+			"import": "./dist/aggregate.js"
+		},
+		"./grouping": {
+			"types": "./dist/grouping.d.ts",
+			"import": "./dist/grouping.js"
+		},
+		"./export": {
+			"types": "./dist/export.d.ts",
+			"import": "./dist/export.js"
+		},
+		"./chart": {
+			"types": "./dist/chart.d.ts",
+			"import": "./dist/chart.js"
+		},
+		"./query": {
+			"types": "./dist/query.d.ts",
+			"import": "./dist/query.js"
+		},
+		"./header": {
+			"types": "./dist/header.d.ts",
+			"import": "./dist/header.js"
+		},
+		"./data-source": {
+			"types": "./dist/data-source.d.ts",
+			"import": "./dist/data-source.js"
+		},
+		"./focus": {
+			"types": "./dist/focus.d.ts",
+			"import": "./dist/focus.js"
+		},
+		"./persist": {
+			"types": "./dist/persist.d.ts",
+			"import": "./dist/persist.js"
+		},
+		"./edit": {
+			"types": "./dist/edit.d.ts",
+			"import": "./dist/edit.js"
+		},
+		"./source-rest": {
+			"types": "./dist/source-rest.d.ts",
+			"import": "./dist/source-rest.js"
+		},
+		"./clipboard": {
+			"types": "./dist/clipboard.d.ts",
+			"import": "./dist/clipboard.js"
+		},
+		"./pivot": {
+			"types": "./dist/pivot.d.ts",
+			"import": "./dist/pivot.js"
+		},
+		"./conditional-style": {
+			"types": "./dist/conditional-style.d.ts",
+			"import": "./dist/conditional-style.js"
+		},
+		"./xlsx": {
+			"types": "./dist/xlsx.d.ts",
+			"import": "./dist/xlsx.js"
+		},
+		"./package.json": "./package.json"
+	},
+	"scripts": {
+		"build": "tsdown",
+		"typecheck": "tsgo --noEmit",
+		"test:parallel:vitest": "TZ=UTC vitest run",
+		"test": "pnpm --parallel --aggregate-output /^test:parallel:/",
+		"lint": "eslint --cache .",
+		"prepack": "pnpm run build && clean-pkg-json",
+		"prerelease": "pnpm run lint && pnpm run typecheck && pnpm run build"
+	},
+	"devDependencies": {
+		"@types/node": "catalog:types",
+		"@typescript/native-preview": "catalog:types",
+		"clean-pkg-json": "catalog:release",
+		"eslint": "catalog:lint",
+		"publint": "catalog:lint",
+		"tsdown": "catalog:build",
+		"vitest": "catalog:testing"
+	}
+}

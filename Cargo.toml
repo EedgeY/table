@@ -1,0 +1,16 @@
+[workspace]
+resolver = "2"
+members = ["packages/core-rs"]
+
+[workspace.package]
+edition = "2021"
+license = "MIT"
+authors = ["tarbo-table"]
+repository = "https://github.com/tarbo-table/tarbo-table"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = "symbols"
