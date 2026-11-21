@@ -222,5 +222,4 @@ pnpm は git URL 依存については **コミット SHA を `pnpm-lock.yaml` �
 ## 関連ドキュメント
 
 - **リリース側手順** (`tarbo-table` 本体メンテナ向け): [RELEASE.md](./RELEASE.md)
-- 設計判断の記録: [docs/adr/](./adr/)
 - 本体 README: [README.md](../README.md)

@@ -2,7 +2,7 @@
 
 > Status: **proposed**, awaiting maintainer sign-off. Resolves issue #7 (the HITL gate that unblocks #8).
 >
-> Ratifies the decisions in [ADR-0001](adr/0001-sandboxed-expression-evaluator-for-computed-columns.md) (sandboxed evaluator), [ADR-0002](adr/0002-ieee754-with-cleanup-for-computed-numbers.md) (IEEE-754 + cleanup), and [ADR-0003](adr/0003-computed-column-definition-clause-syntax.md) (`let … ;` clause) into a concrete, testable surface.
+> Ratifies the decisions in ADR-0001 (sandboxed evaluator), ADR-0002 (IEEE-754 + cleanup), and ADR-0003 (`let … ;` clause) into a concrete, testable surface.
 >
 > **Why this is a gate:** the moment a `let …;` definition ships inside a shared `ttq` URL, this grammar becomes a backward-compatibility surface. Widening it later (new functions, looser coercion) is cheap; narrowing it (removing a function, tightening coercion) breaks existing links. v1 is therefore **deliberately small** — start minimal, add on demand.
 
