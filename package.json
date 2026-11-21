@@ -1,0 +1,43 @@
+{
+	"name": "@tarbo-table/core-rs",
+	"version": "0.1.0",
+	"description": "Rust→WebAssembly engine for @tarbo-table/core (filter, sort, pagination).",
+	"homepage": "https://github.com/EedgeY/table#readme",
+	"bugs": "https://github.com/EedgeY/table/issues",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/EedgeY/table.git",
+		"directory": "packages/core-rs"
+	},
+	"files": [
+		"src",
+		"pkg-node",
+		"pkg-web",
+		"pkg-node-image",
+		"pkg-web-image"
+	],
+	"type": "module",
+	"sideEffects": false,
+	"exports": {
+		".": {
+			"types": "./src/index.ts",
+			"node": "./src/node.ts",
+			"browser": "./src/web.ts",
+			"default": "./src/web.ts"
+		},
+		"./node": "./src/node.ts",
+		"./web": "./src/web.ts",
+		"./react": "./src/react.ts",
+		"./image": "./src/image.ts",
+		"./package.json": "./package.json"
+	},
+	"peerDependencies": {
+		"react": "^19.1.0"
+	},
+	"peerDependenciesMeta": {
+		"react": {
+			"optional": true
+		}
+	}
+}
